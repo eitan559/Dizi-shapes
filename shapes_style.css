@@ -1,0 +1,335 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: url('background.svg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Comic Sans MS', sans-serif;
+    direction: rtl;
+    overflow: hidden;
+}
+
+.login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+h1 {
+    font-size: 28px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#username {
+    padding: 6px;
+    font-size: 14px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    width: 180px;
+    margin-bottom: 10px;
+}
+
+#start-game {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#start-game:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#score {
+    position: absolute;
+    top: 50px;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    border-radius: 10px;
+}
+
+#username-display {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+#time-left {
+    color: #ff4d4d;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(255, 0, 0, 0.7);
+}
+
+#bee {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    animation: fly 1.5s ease-in-out infinite, rotate 3s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+    transition: transform 0.3s ease;
+}
+
+#bee-image {
+    width: 100%;
+    height: 100%;
+    animation: flap-wings 0.2s steps(2) infinite, sparkle 2s infinite;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #fff, #ffe6b3);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+    display: none;
+    animation: pop 0.3s ease;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: #FFD700 transparent;
+}
+
+#shape-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+    max-width: 400px; /* הגבלת רוחב לפריסה טובה יותר */
+}
+
+.shape-button {
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.shape-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.shape-button:active {
+    transform: scale(0.95);
+}
+
+#feedback {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease;
+}
+
+.game-over {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+}
+
+#game-over-text {
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    animation: bounce 1s ease infinite;
+}
+
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#next-level-button, #restart-button, #home-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+    margin-top: 10px;
+}
+
+#next-level-button:hover, #restart-button:hover, #home-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .login-box {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    #username {
+        padding: 4px;
+        font-size: 12px;
+        width: 150px;
+    }
+
+    #start-game {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #score {
+        top: 30px;
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    #bee {
+        width: 90px;
+        height: 90px;
+    }
+
+    .speech-bubble {
+        top: -60px;
+        padding: 8px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+
+    .speech-bubble::after {
+        border-width: 8px 8px 0;
+    }
+
+    #shape-buttons {
+        gap: 10px;
+        margin-top: 20px;
+        max-width: 300px;
+    }
+
+    .shape-button {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+    }
+
+    #feedback {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    #game-over-text {
+        font-size: 30px;
+    }
+
+    #next-level-button, #restart-button, #home-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@keyframes fly {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+}
+
+@keyframes flap-wings {
+    0% { content: url('bee_frame1.svg'); }
+    50% { content: url('bee_frame2.svg'); }
+}
+
+@keyframes sparkle {
+    0%, 100% { filter: brightness(100%); }
+    50% { filter: brightness(130%); }
+}
+
+@keyframes pop {
+    0% { transform: translateX(-50%) scale(0); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}

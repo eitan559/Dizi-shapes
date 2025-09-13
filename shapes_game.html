@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dizi - משחק צורות</title>
+    <link rel="stylesheet" href="shapes_style.css">
+    <link rel="shortcut icon" href="logo.jpg" type="image/x-icon">
+</head>
+<body>
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <h1>ברוכים הבאים למשחק צורות!</h1>
+            <p>הזן שם משתמש והתחל את ההרפתקה</p>
+            <input type="text" id="username" placeholder="הכנס שם משתמש">
+            <button id="start-game">התחל משחק</button>
+        </div>
+    </div>
+    <div id="game-container" style="display: none;">
+        <div id="score">
+            שם משתמש: <span id="username-display"></span> | ניקוד: <span id="score-value">0</span> | 
+            טעויות: <span id="mistakes">0</span> | 
+            שלב: <span id="level">1</span> | 
+            זמן: <span id="time-left">8</span> שניות
+        </div>
+        <div id="bee">
+            <img id="bee-image" src="bee_frame1.svg" alt="דבורה">
+            <div id="speech-bubble" class="speech-bubble"></div>
+        </div>
+        <div id="shape-buttons"></div>
+        <div id="feedback"></div>
+    </div>
+    <div id="game-over" class="game-over">
+        <div id="game-over-text"></div>
+        <canvas id="confetti-canvas"></canvas>
+        <button id="next-level-button" style="display: none;">עבור לשלב הבא</button>
+        <button id="restart-button">שחק שוב</button>
+        <button id="home-button">חזרה לדף הבית</button>
+    </div>
+    <audio id="shape-audio"></audio>
+    <audio id="feedback-audio"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="shapes_script.js"></script>
+</body>
+</html>
